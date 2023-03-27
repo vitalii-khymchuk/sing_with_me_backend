@@ -2,10 +2,8 @@ const { ctrlWrap } = require("@helpers");
 const { ARCCloud } = require("@services");
 
 const find = async (req, res) => {
-  const { formData } = req.body;
-  const result = await ARCCloud.find();
-
-  res.status(200).json({ status: 200, data: result });
+  const { metadata } = await ARCCloud.find();
+  res.status(200).json({ status: 200, data: metadata });
 };
 
 module.exports = { find: ctrlWrap(find) };

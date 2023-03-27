@@ -1,7 +1,7 @@
 const axios = require("axios");
 const FormData = require("form-data");
 const crypto = require("crypto");
-const fs = require("fs/promises");
+const fs = require("fs");
 const path = require("path");
 
 const options = {
@@ -42,8 +42,8 @@ const sign = (signString, accessSecret) => {
 
 const find = async () => {
   const pathToFile = path.resolve("./tmp/sample.wav");
-  const buffer = await fs.readFile(pathToFile);
-  const blob = new Blob([buffer], { type: "audio/wav" });
+  const stream = fs.createReadStream(pathToFile);
+  const fileSize = fs.statSync(pathToFile).size;
 
   const current_data = new Date();
   const timestamp = current_data.getTime() / 1000;
@@ -51,12 +51,12 @@ const find = async () => {
   const stringToSign = buildStringToSign(timestamp);
   const signature = sign(stringToSign, options.access_secret);
   const formData = new FormData();
-  formData.append("sample", blob, "sample.wav");
+  formData.append("sample", stream, { filename: "sample.wav" });
   formData.append("access_key", options.access_key);
   formData.append("data_type", options.data_type);
   formData.append("signature_version", options.signature_version);
   formData.append("signature", signature);
-  formData.append("sample_bytes", blob.size);
+  formData.append("sample_bytes", fileSize);
   formData.append("timestamp", timestamp);
 
   const config = {
