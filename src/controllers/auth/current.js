@@ -1,5 +1,5 @@
 const { User } = require("../../models");
-const { ctrlWrap } = require("../../utils");
+const { ctrlWrap } = require("../../helpers");
 
 const current = async (req, res) => {
   const { id } = req.user;

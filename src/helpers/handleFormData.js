@@ -1,6 +1,6 @@
 const multer = require("multer");
 const path = require("path");
-const { HttpError } = require("@helpers");
+const { HttpError } = require("../utils/");
 
 const uploadDir = path.resolve("./tmp");
 

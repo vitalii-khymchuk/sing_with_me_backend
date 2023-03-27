@@ -1,4 +1,4 @@
-const { ctrlWrap, HttpError } = require("../../utils");
+const { ctrlWrap, HttpError } = require("../../helpers");
 const { User } = require("../../models/");
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");

@@ -1,5 +1,5 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
-const { handleMongooseError } = require("../utils");
+const { handleMongooseError } = require("../helpers");
 const Joi = require("joi");
 
 const phoneRegex =

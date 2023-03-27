@@ -1,4 +1,4 @@
-const contactsCtrl = require("./contactsController");
 const authCtrl = require("./auth");
+const recognitionCtrl = require("./recognition");
 
-module.exports = { contactsCtrl, authCtrl };
+module.exports = { recognitionCtrl, authCtrl };

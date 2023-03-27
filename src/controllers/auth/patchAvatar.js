@@ -1,5 +1,5 @@
 const { User } = require("../../models");
-const { ctrlWrap, HttpError } = require("../../utils/");
+const { ctrlWrap, HttpError } = require("../../helpers/");
 
 const patchAvatar = async (req, res) => {
   const { description } = req.body;

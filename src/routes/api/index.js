@@ -1,4 +1,4 @@
-const contactsRouter = require("./contacts");
 const authRouter = require("./auth");
+const recognitionRouter = require("./recognition");
 
-module.exports = { contactsRouter, authRouter };
+module.exports = { authRouter, recognitionRouter };

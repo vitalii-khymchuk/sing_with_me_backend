@@ -1,4 +1,4 @@
-const { ctrlWrap, HttpError } = require("../../utils");
+const { ctrlWrap, HttpError } = require("../../helpers");
 const { User } = require("../../models");
 
 const verification = async (req, res) => {
