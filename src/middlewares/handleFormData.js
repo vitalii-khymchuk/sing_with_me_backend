@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 const { HttpError } = require("@helpers");
 
-const uploadDir = path.resolve("./tmp");
+const uploadDir = path.join(__dirname, "..", "..", "tmp");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -13,14 +13,16 @@ const storage = multer.diskStorage({
     const fileName = file.originalname;
 
     if (!extensions.some((e) => fileName.toLowerCase().endsWith(e))) {
-      cb(HttpError(400, "Invalid  extension type"));
+      cb(HttpError(400, "Invalid extension type"));
     } else {
       cb(null, fileName);
     }
   },
-  limits: { fileSize: 5048576 },
 });
 
-const handleFormData = multer({ storage });
+const handleFormData = multer({
+  storage: storage,
+  limits: { fileSize: 5048576 },
+});
 
 module.exports = { handleFormData };

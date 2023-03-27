@@ -1,40 +1,40 @@
-const express = require("express");
-const { authCtrl } = require("../../controllers");
+// const express = require("express");
+// const { authCtrl } = require("../../controllers");
 
-const { moveFromTmpToCloud } = require("../../middlewares");
+// const { moveFromTmpToCloud } = require("../../middlewares");
 
-const {
-  validateBody,
-  authenticate,
-  handleFormData,
-} = require("../../middlewares");
-const { authSchemas } = require("../../models");
+// const {
+//   validateBody,
+//   authenticate,
+//   handleFormData,
+// } = require("../../middlewares");
+// const { authSchemas } = require("../../models");
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post("/signup", validateBody(authSchemas.sighUpSchema), authCtrl.signup);
+// router.post("/signup", validateBody(authSchemas.sighUpSchema), authCtrl.signup);
 
-router.post("/signin", validateBody(authSchemas.sighInSchema), authCtrl.signin);
+// router.post("/signin", validateBody(authSchemas.sighInSchema), authCtrl.signin);
 
-router.get("/current", authenticate, authCtrl.current);
+// router.get("/current", authenticate, authCtrl.current);
 
-router.post("/logout", authenticate, authCtrl.logout);
+// router.post("/logout", authenticate, authCtrl.logout);
 
-router.patch(
-  "/",
-  authenticate,
-  validateBody(authSchemas.patchSubscriptionSchema),
-  authCtrl.patchSubscription
-);
+// router.patch(
+//   "/",
+//   authenticate,
+//   validateBody(authSchemas.patchSubscriptionSchema),
+//   authCtrl.patchSubscription
+// );
 
-router.patch(
-  "/avatars",
-  authenticate,
-  handleFormData.single("avatar"),
-  moveFromTmpToCloud,
-  authCtrl.patchAvatar
-);
+// router.patch(
+//   "/avatars",
+//   authenticate,
+//   handleFormData.single("avatar"),
+//   moveFromTmpToCloud,
+//   authCtrl.patchAvatar
+// );
 
-router.get("/verify/:verificationToken", authCtrl.verification);
+// router.get("/verify/:verificationToken", authCtrl.verification);
 
-module.exports = router;
+// module.exports = router;

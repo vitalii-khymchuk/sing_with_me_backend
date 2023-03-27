@@ -1,6 +1,8 @@
 const axios = require("axios");
 const FormData = require("form-data");
 const crypto = require("crypto");
+const fs = require("fs/promises");
+const path = require("path");
 
 const options = {
   endpoint: "/v1/identify",
@@ -38,17 +40,18 @@ const sign = (signString, accessSecret) => {
     .digest("base64");
 };
 
-const find = async (file) => {
-  console.log("file", file);
+const find = async () => {
+  const pathToFile = path.resolve("./tmp/sample.wav");
+  const buffer = await fs.readFile(pathToFile);
+  const blob = new Blob([buffer], { type: "audio/wav" });
+
   const current_data = new Date();
   const timestamp = current_data.getTime() / 1000;
 
   const stringToSign = buildStringToSign(timestamp);
-
   const signature = sign(stringToSign, options.access_secret);
-  // const formData = new FormData();
-  // formData.append("sample", blob, "sample");
-
+  const formData = new FormData();
+  formData.append("sample", blob, "sample.wav");
   formData.append("access_key", options.access_key);
   formData.append("data_type", options.data_type);
   formData.append("signature_version", options.signature_version);
