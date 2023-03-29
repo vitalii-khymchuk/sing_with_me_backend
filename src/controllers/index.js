@@ -1,4 +1,4 @@
-const authCtrl = require("./auth");
 const recognitionCtrl = require("./recognition");
+const googleAuthCtrl = require("./googleAuth");
 
-module.exports = { recognitionCtrl, authCtrl };
+module.exports = { recognitionCtrl, googleAuthCtrl };

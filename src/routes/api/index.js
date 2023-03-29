@@ -1,4 +1,5 @@
-const authRouter = require("./auth");
+// const authRouter = require("./auth");
 const recognitionRouter = require("./recognition");
+const googleAuthRouter = require("./googleAuth");
 
-module.exports = { authRouter, recognitionRouter };
+module.exports = { recognitionRouter, googleAuthRouter };
