@@ -1,4 +1,4 @@
-const { signIn } = require("./signIn");
-const { signInSuccess } = require("./signInSuccess");
+const { signInWithGoogle } = require("./signInWithGoogle");
+const { logout } = require("./logout");
 
-module.exports = { signIn, signInSuccess };
+module.exports = { signInWithGoogle, logout };
