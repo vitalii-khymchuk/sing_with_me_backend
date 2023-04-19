@@ -25,10 +25,16 @@ class UserService {
     return saved;
   }
 
-  async addToHistory(email, item) {
+  async addToHistory(email, results, query) {
     const maxHistoryItems = 20;
     const [{ history, _id }] = await User.find({ email });
-    history.unshift(item);
+    const historyItem = {
+      query: query ?? results[0].full_title,
+      thumb: results[0].header_image_thumbnail_url,
+      hits: results,
+    };
+    history.unshift(historyItem);
+
     if (history.length > maxHistoryItems) {
       history.splice(maxHistoryItems, arr.length - maxHistoryItems);
     }
@@ -45,9 +51,9 @@ class UserService {
 
   async removeFromSaved(email, itemId) {
     const [{ saved, _id }] = await User.find({ email });
-    saved = saved.filter(({ _id }) => _id !== itemId);
-    await User.findByIdAndUpdate(_id, { saved });
-    return saved;
+    const filteredSaved = saved.filter(({ id }) => id !== itemId);
+    await User.findByIdAndUpdate(_id, { saved: filteredSaved });
+    return filteredSaved;
   }
 }
 
