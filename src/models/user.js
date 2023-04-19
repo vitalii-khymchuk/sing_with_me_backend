@@ -44,10 +44,9 @@ const userSchema = new Schema(
     history: {
       type: [
         {
-          query: {
-            type: String,
-            hits: [{ ...savedSongSchema }],
-          },
+          query: String,
+          thumb: { ...urlSchema, default: "" },
+          hits: [{ ...savedSongSchema }],
         },
       ],
       default: [],

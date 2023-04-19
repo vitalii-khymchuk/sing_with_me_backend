@@ -1,5 +1,5 @@
 const recognitionCtrl = require("./recognition");
 const googleAuthCtrl = require("./googleAuth");
-const userLibrariesCtrl = require("./userLibrary");
+const userLibraryCtrl = require("./userLibrary");
 
-module.exports = { recognitionCtrl, googleAuthCtrl, userLibrariesCtrl };
+module.exports = { recognitionCtrl, googleAuthCtrl, userLibraryCtrl };

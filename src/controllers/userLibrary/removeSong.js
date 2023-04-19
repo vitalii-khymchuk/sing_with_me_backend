@@ -1,15 +1,15 @@
 const { ctrlWrap, HtmlError } = require("@helpers");
 const { UserService } = require("@services");
 
-const addSong = async (req, res) => {
+const removeSong = async (req, res) => {
   const { email } = req.user;
-  const { id } = req.params;
-  if (!id) {
+  const { songId } = req.params;
+  if (!songId) {
     throw HtmlError(400);
   }
-  const data = await UserService.removeFromSaved(email, id);
+  const data = await UserService.removeFromSaved(email, songId);
 
   res.status(200).json({ status: 200, message: "success", data });
 };
 
-module.exports = { addSong: ctrlWrap(addSong) };
+module.exports = { removeSong: ctrlWrap(removeSong) };
