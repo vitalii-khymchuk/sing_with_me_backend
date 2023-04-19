@@ -1,17 +1,16 @@
 const { ctrlWrap, HttpError } = require("@helpers");
-const { Genius } = require("@services");
+const { Genius, UserService } = require("@services");
 
 const findByText = async (req, res) => {
-  const { email } = req.user;
-  if (!email) {
-    throw HttpError(401);
-  }
+  const email = req.user?.email;
   const { query } = req.query;
   if (!query) {
     throw HttpError(400);
   }
   const data = await Genius.search(query);
-  await UserService.addToHistory(email, data);
+  if (email) {
+    await UserService.addToHistory(email, data);
+  }
   res.status(200).json({ status: 200, message: "success", data });
 };
 
