@@ -4,9 +4,11 @@ const { handleFormData } = require("@middlewares");
 
 const router = express.Router();
 router.post(
-  "/recognition",
+  "/recognition/search",
   handleFormData.single("sample"),
-  recognitionCtrl.find
+  recognitionCtrl.findByRec
 );
+router.get("/recognition/search", recognitionCtrl.findByText);
+router.get("/recognition/getinfo/:id", recognitionCtrl.getInfo);
 
 module.exports = router;
