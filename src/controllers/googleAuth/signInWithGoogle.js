@@ -6,7 +6,7 @@ const signInWithGoogle = async (req, res, next) => {
     const { credential: token } = req.body;
     const { name, email, picture } = await GoogleAuth.verify(token);
 
-    await UserService.signInGoogle({
+    await UserService.signInWithGoogle({
       email,
       token,
     });
