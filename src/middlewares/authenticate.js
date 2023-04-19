@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
+const { GoogleAuth } = require("@services");
 const { HttpError } = require("../helpers");
-const { User } = require("../models/");
+const { User } = require("@models");
 
 const authenticate = async (req, res, next) => {
   const { authorization = "" } = req.headers;
@@ -8,16 +8,14 @@ const authenticate = async (req, res, next) => {
   if (bearer !== "Bearer" || !token) {
     next(HttpError(401));
   }
-  const { SECRET_KEY } = process.env;
   try {
-    const { id } = jwt.verify(token, SECRET_KEY);
-    const user = await User.findById(id);
-    if (!user || !user.token || user.token !== token) {
-      next(HttpError(401));
-    }
-    req.user = user;
+    const payload = await GoogleAuth.verify(token);
+    // const [{ _id }] = await User.find({ email: payload.email });
+    // payload.id = _id;
+    req.user = payload;
     next();
   } catch (error) {
+    console.log(error);
     next(HttpError(401));
   }
 };

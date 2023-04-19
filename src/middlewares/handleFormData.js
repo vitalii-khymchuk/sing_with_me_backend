@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const { v4: uuid } = require("uuid");
 const { HttpError } = require("@helpers");
 
 const uploadDir = path.join(__dirname, "..", "..", "tmp");
@@ -10,7 +11,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const extensions = [".wav"];
-    const fileName = file.originalname;
+    const fileName = `${uuid()}_${file.originalname}`;
 
     if (!extensions.some((e) => fileName.toLowerCase().endsWith(e))) {
       cb(HttpError(400, "Invalid extension type"));
