@@ -1,4 +1,7 @@
 const ARCCloud = require("./ARCCloud");
-const { oauth2Client } = require("./GoogleCloudIdentity");
+const GoogleAuth = require("./GoogleCloudIdentity");
+const mongoDB = require("./mongoDB");
+const Genius = require("./Genius");
+const UserService = require("./UserService");
 
-module.exports = { ARCCloud, oauth2Client };
+module.exports = { ARCCloud, GoogleAuth, mongoDB, Genius, UserService };
