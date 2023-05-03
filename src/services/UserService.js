@@ -12,7 +12,7 @@ class UserService {
   }
 
   async logout(email) {
-    await User.findOneAndUpdate({ email }, { token: null });
+    return await User.findOneAndUpdate({ email }, { token: null });
   }
 
   async getHistory(email) {
