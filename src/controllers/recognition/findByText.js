@@ -9,7 +9,7 @@ const findByText = async (req, res) => {
   }
   const data = await Genius.search(query);
   if (email) {
-    await UserService.addToHistory(email, data);
+    await UserService.addToHistory(email, data, query);
   }
   res.status(200).json({ status: 200, message: "success", data });
 };

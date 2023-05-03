@@ -40,10 +40,10 @@ const sign = (signString, accessSecret) => {
     .digest("base64");
 };
 
-const find = async () => {
-  const pathToFile = path.resolve("./tmp/sample.wav");
-  const stream = fs.createReadStream(pathToFile);
-  const fileSize = fs.statSync(pathToFile).size;
+const find = async ({ filename, path }) => {
+  // const pathToFile = path.resolve("./tmp/sample.wav");
+  const stream = fs.createReadStream(path);
+  const fileSize = fs.statSync(path).size;
 
   const current_data = new Date();
   const timestamp = current_data.getTime() / 1000;
@@ -51,7 +51,7 @@ const find = async () => {
   const stringToSign = buildStringToSign(timestamp);
   const signature = sign(stringToSign, options.access_secret);
   const formData = new FormData();
-  formData.append("sample", stream, { filename: "sample.wav" });
+  formData.append("sample", stream, { filename });
   formData.append("access_key", options.access_key);
   formData.append("data_type", options.data_type);
   formData.append("signature_version", options.signature_version);
