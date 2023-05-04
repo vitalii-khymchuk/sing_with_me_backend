@@ -10,5 +10,10 @@ router.post(
   authenticate({ shouldPassError: true }),
   googleAuthCtrl.logout
 );
+router.get(
+  "/auth/current",
+  authenticate({ shouldPassError: true }),
+  googleAuthCtrl.current
+);
 
 module.exports = router;
