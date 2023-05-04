@@ -1,11 +1,11 @@
-const { ctrlWrap, HtmlError } = require("@helpers");
+const { ctrlWrap, HttpError } = require("@helpers");
 const { UserService } = require("@services");
 
 const removeSong = async (req, res) => {
   const { email } = req.user;
   const { songId } = req.params;
   if (!songId) {
-    throw HtmlError(400);
+    throw HttpError(400);
   }
   const data = await UserService.removeFromSaved(email, songId);
 

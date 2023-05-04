@@ -1,4 +1,4 @@
-const { ctrlWrap, HtmlError } = require("@helpers");
+const { ctrlWrap, HttpError } = require("@helpers");
 const { UserService } = require("@services");
 
 const addSong = async (req, res) => {
@@ -11,7 +11,7 @@ const addSong = async (req, res) => {
     release_date_for_display,
   } = req.body;
   if (!id || !full_title) {
-    throw HtmlError(400);
+    throw HttpError(400);
   }
   const data = await UserService.addToSaved(email, {
     id,
@@ -21,7 +21,7 @@ const addSong = async (req, res) => {
     release_date_for_display,
   });
 
-  res.status(200).json({ status: 200, message: "success", data });
+  res.status(201).json({ status: 201, message: "success", data });
 };
 
 module.exports = { addSong: ctrlWrap(addSong) };
