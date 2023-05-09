@@ -36,7 +36,7 @@ class UserService {
     history.unshift(historyItem);
 
     if (history.length > maxHistoryItems) {
-      history.splice(maxHistoryItems, arr.length - maxHistoryItems);
+      history.splice(maxHistoryItems, history.length - maxHistoryItems);
     }
     await User.findByIdAndUpdate(_id, { history });
     return history;

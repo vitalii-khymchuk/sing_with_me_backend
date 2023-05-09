@@ -45,7 +45,7 @@ const getInfo = async (id = 2353271) => {
       header_image_url,
       release_date_for_display,
       title,
-      album: { cover_art_url, name, release_date_for_display: release_date },
+      album,
       media,
       primary_artist,
       producer_artists,
@@ -72,6 +72,12 @@ const getInfo = async (id = 2353271) => {
           ),
         }))
       : [];
+
+  const {
+    cover_art_url,
+    name,
+    release_date_for_display: release_date,
+  } = album ?? {};
 
   return {
     id,
